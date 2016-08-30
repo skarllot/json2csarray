@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>JSON array to C# array</title>
+
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="deps/css/bundle.css">
+    <link rel="stylesheet" type="text/css" href="common/main.css">
+</head>
+
+<body>
+    <div class="container" ng-controller="parserController as vm">
+        <div class="row header">
+            <div class="span6">
+                <h1>json2csarray <small>generate C# array from JSON</small></h1>
+            </div>
+        </div>
+        <div class="row">
+            <textarea id="json-data" placeholder="Enter JSON input data" rows="10" ng-model="vm.jsonInput" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+        </div>
+        <div class="row">
+            <button ng-click="vm.generate()" class="btn btn-primary">Generate</button>
+        </div>
+        
+        <div class="row" ng-show="vm.hasOutput">
+            <textarea id="cs-data" rows="10" ng-bind="vm.csOutput" onclick="this.select();" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+        </div>
+    </div>
+
+    <script src="bootstrap.js"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="deps/js/html5shiv.min.js"></script>
+        <script src="deps/js/respond.min.js"></script>
+    <![endif]-->
+</body>
+
+</html>

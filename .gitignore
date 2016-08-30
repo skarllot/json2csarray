@@ -1,0 +1,6 @@
+*~
+*zip
+/app/deps
+/build
+/dist
+/node_modules
