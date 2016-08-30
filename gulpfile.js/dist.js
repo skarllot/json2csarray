@@ -38,7 +38,7 @@ gulp.task('clean-dist', function() {
 
 gulp.task('create-package', function() {
     return gulp.src('dist/**/*')
-        .pipe(zip('magmanager-ui.zip'))
+        .pipe(zip('json2csarray.zip'))
         .pipe(gulp.dest('./'));
 });
 
