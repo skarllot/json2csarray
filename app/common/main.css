@@ -20,6 +20,12 @@ textarea {
 	padding: 10px;
 }
 
+hr {
+	border-color: #e6e6e6;
+	margin-top: 30px;
+	width: 720px;
+}
+
 .container {
 	margin: 20px auto;
 	width: 720px;
@@ -31,6 +37,20 @@ textarea {
 
 small {
 	display: block;
+}
+
+.names div:first-child {
+	padding: 0px;
+	padding-right: 3px;
+}
+
+.names div:nth-child(2) {
+	padding: 0px;
+	padding-left: 3px;
+}
+
+.names input {
+	width: 100%;
 }
 
 #json-data, #cs-data {

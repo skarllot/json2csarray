@@ -1,6 +1,6 @@
 {
   "name": "json2csarray",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Generate a C# array from JSON",
   "directories": {
     "test": "test"

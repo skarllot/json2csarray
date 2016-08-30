@@ -7,6 +7,8 @@ parserController.$inject = [];
 function parserController() {
     var vm = this;
 
+    vm.typeName = 'TypeName';
+    vm.arrayName = 'TypeList';
     vm.jsonInput = '';
     vm.csOutput = '';
     vm.hasOutput = false;
@@ -18,9 +20,9 @@ function parserController() {
         if (!_.isArray(parsedJson))
             return;
         
-        var entry = _.template('\tnew TypeName {\n<%= fields %>\n\t}');
+        var entry = _.template('\tnew <%= typeName %> {\n<%= fields %>\n\t}');
         var field = _.template('\t\t<%= name %> = <%= value %>');
-        var array = _.template('readonly TypeName[] TypeList =\n{\n<%= elements %>\n}');
+        var array = _.template('readonly <%= typeName %>[] <%= arrayName %> =\n{\n<%= elements %>\n}');
         
         var entries = [];
         parsedJson.forEach(function(element) {
@@ -31,10 +33,10 @@ function parserController() {
                 
                 fields.push(field({'name' : key, 'value' : value}));
             });
-            entries.push(entry({'fields' : fields.join(', \n')}));
+            entries.push(entry({'typeName': vm.typeName, 'fields' : fields.join(', \n')}));
         });
         
-        vm.csOutput = array({'elements' : entries.join(', \n')});
+        vm.csOutput = array({'typeName': vm.typeName, 'arrayName': vm.arrayName, 'elements' : entries.join(', \n')});
         vm.hasOutput = true;
     }
     
