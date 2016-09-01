@@ -53,6 +53,13 @@ small {
 	width: 100%;
 }
 
+.gen-line div {
+	height: 3em;
+	padding: 0px;
+	vertical-align: bottom;
+	line-height: 3em;
+}
+
 #json-data, #cs-data {
 	font-family: Monaco, Andale Mono, Courier New, Courier, monospace;
 	resize: none;

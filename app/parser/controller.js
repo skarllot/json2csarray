@@ -12,17 +12,34 @@ function parserController() {
     vm.jsonInput = '';
     vm.csOutput = '';
     vm.hasOutput = false;
+    vm.errorOutput = '';
+    vm.hasError = false;
     vm.generate = generate;
-    vm.closeOutput = closeOutput;
+    vm.closeError = closeError;
+    vm.isReadOnly = true;
     
     function generate() {
-        var parsedJson = JSON.parse(vm.jsonInput);
-        if (!_.isArray(parsedJson))
+        closeOutput();
+        closeError();
+        
+        var parsedJson;
+        try {
+            parsedJson = JSON.parse(vm.jsonInput);
+        } catch (e) {
+            vm.errorOutput = e;
+            vm.hasError = true;
             return;
+        }
+        
+        if (!_.isArray(parsedJson)) {
+            vm.errorOutput = 'The provided JSON is not an array';
+            vm.hasError = true;
+            return;
+        }
         
         var entry = _.template('\tnew <%= typeName %> {\n<%= fields %>\n\t}');
         var field = _.template('\t\t<%= name %> = <%= value %>');
-        var array = _.template('readonly <%= typeName %>[] <%= arrayName %> =\n{\n<%= elements %>\n}');
+        var array = _.template('<%= readonly %><%= typeName %>[] <%= arrayName %> =\n{\n<%= elements %>\n};');
         
         var entries = [];
         parsedJson.forEach(function(element) {
@@ -36,12 +53,18 @@ function parserController() {
             entries.push(entry({'typeName': vm.typeName, 'fields' : fields.join(', \n')}));
         });
         
-        vm.csOutput = array({'typeName': vm.typeName, 'arrayName': vm.arrayName, 'elements' : entries.join(', \n')});
+        var readonlyValue = vm.isReadOnly ? 'readonly ' : '';
+        vm.csOutput = array({'readonly': readonlyValue, 'typeName': vm.typeName, 'arrayName': vm.arrayName, 'elements' : entries.join(', \n')});
         vm.hasOutput = true;
     }
     
     function closeOutput() {
         vm.hasOutput = false;
         vm.csOutput = '';
+    }
+    
+    function closeError() {
+        vm.hasError = false;
+        vm.errorOutput = '';
     }
 }
