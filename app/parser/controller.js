@@ -59,11 +59,11 @@ function parserController() {
 
                 fields.push(field({ 'name': key, 'value': value }));
             });
-            entries.push(entry({ 'typeName': vm.typeName, 'fields': fields.join(', \n') }));
+            entries.push(entry({ 'typeName': vm.typeName, 'fields': fields.join(',\n') }));
         });
 
         var readonlyValue = vm.isReadOnly ? 'readonly ' : '';
-        vm.csOutput = array({ 'readonly': readonlyValue, 'typeName': vm.typeName, 'arrayName': vm.arrayName, 'elements': entries.join(', \n') });
+        vm.csOutput = array({ 'readonly': readonlyValue, 'typeName': vm.typeName, 'arrayName': vm.arrayName, 'elements': entries.join(',\n') });
         vm.hasOutput = true;
     }
 
